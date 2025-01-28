@@ -159,7 +159,7 @@ def run_singular_command(singular_commands):
     return result.stdout
 
 
-def generate_invariants(n, max_invariants):
+def generate_invariants(n):
 
     num_variables = n**2
     variables = ', '.join([f'x{i}' for i in range(1, num_variables+1)])
@@ -177,13 +177,10 @@ def generate_invariants(n, max_invariants):
     {R_singular}
     {D_singular}
     {L_singular}
-    setring(F);
-    matrix G[1..3] = {R, D, L};
-    matrix B(1..3) = invariant_ring(G, max={max_invariants});
+    matrix B(1..3);
+    B(1..3) = invariant_ring(R, D, L);
     print(B(1));
     """
-
-    print(singular_commands)
 
     result = run_singular_command(singular_commands)
 
