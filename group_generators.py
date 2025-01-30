@@ -177,13 +177,9 @@ def generate_invariants(n, max_invariants):
     {R_singular}
     {D_singular}
     {L_singular}
-    setring(F);
-    matrix G[1..3] = {R, D, L};
     matrix B(1..3) = invariant_ring(G, max={max_invariants});
     print(B(1));
     """
-
-    print(singular_commands)
 
     result = run_singular_command(singular_commands)
 
