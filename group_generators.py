@@ -175,16 +175,16 @@ def generate_invariants(n):
     LIB "finvar.lib";
     ring F = 0, ({variables}), dp;
     {R_singular}
-    {D_singular}
-    {L_singular}
     matrix B(1..3);
-    B(1..3) = invariant_ring(R, D, L);
+    B(1..3) = invariant_ring(R);
     print(B(1));
     """
 
-    result = run_singular_command(singular_commands)
+    print(singular_commands)
 
-    lines = result.splitlines()
-    expression = lines[-2]
+    # result = run_singular_command(singular_commands)
 
-    return expression
+    #lines = result.splitlines()
+    #expression = lines[-2]
+
+    return None

@@ -177,7 +177,7 @@ def generate_invariants(n):
     {R_singular}
     {D_singular}
     {L_singular}
-    matrix REY,M=reynolds_molien(R,D,L);
+    matrix REY,M=reynolds_molien(R);
     poly p(1..2);
     p(1..2)=partial_molien(M,30);
     p(1);
