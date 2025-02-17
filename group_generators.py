@@ -175,16 +175,16 @@ def generate_invariants(n):
     LIB "finvar.lib";
     ring F = 0, ({variables}), dp;
     {R_singular}
-    matrix B(1..3);
-    B(1..3) = invariant_ring(R);
-    print(B(1));
+    matrix REY,M=reynolds_molien(R);
+    matrix P=primary_char0(REY,M);
+    print(P);
     """
 
     print(singular_commands)
 
-    # result = run_singular_command(singular_commands)
+    result = run_singular_command(singular_commands)
 
-    #lines = result.splitlines()
-    #expression = lines[-2]
+    lines = result.splitlines()
+    expression = lines[-2]
 
-    return None
+    return expression
