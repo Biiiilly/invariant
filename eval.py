@@ -1,5 +1,13 @@
 import re
 import torch
+import random
+import torch.nn as nn
+from torch.utils.data import DataLoader, Dataset
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+from torchvision import transforms
+import numpy as np
+
 
 def compute_from_file(xs, filepath):
 
@@ -40,12 +48,23 @@ def compute_from_file(xs, filepath):
     return results
 
 
-if __name__ == "__main__":
+def invariants_eval(X, n=64):
 
-    xs_test = [torch.tensor(i, dtype=torch.float32) for i in range(1, 65)]
+    num = X.shape[0]
+    output_list = []
+    for i in range(num):
+        x = X[i].flatten() # (8, 8)
+        output = compute_from_file(x, "output.txt")
+        output = [x for x in output if x != 0]
+        random_output = random.sample(output, n)
+        output_list.append(random_output)
 
-    out_list = compute_from_file(xs_test, "output.txt")
-    print("Number of outputs:", len(out_list))
-    
-    for i, val in enumerate(out_list[:10], start=1):
-        print(f"{i} => {val.item() if val.numel()==1 else val}")
+    return torch.tensor(output_list)
+
+
+digits = load_digits()
+X = digits.images  # (1797, 8, 8)
+invariants = invariants_eval(X, n=64)
+
+torch.save(invariants, "invariants.pt")
+
