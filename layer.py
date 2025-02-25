@@ -39,7 +39,7 @@ class TransformingLayer(nn.Module):
 
 class InvariantNet(nn.Module):
 
-    def __init__(self, n=9510):
+    def __init__(self, n=5200):
 
         super(InvariantNet, self).__init__()
 
@@ -60,7 +60,7 @@ class InvariantNet(nn.Module):
     def forward(self, x):
 
         x = F.relu(self.bn1(self.fc1(x)))
-        x = self.dropout(x)
+        #x = self.dropout(x)
         x = F.relu(self.bn2(self.fc2(x)))
         x = self.dropout(x)
         x = F.relu(self.bn3(self.fc3(x)))

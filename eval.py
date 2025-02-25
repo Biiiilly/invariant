@@ -70,7 +70,7 @@ def invariants_eval_all(X):
         x = X[i].flatten() # (8, 8)
         output = compute_from_file(x, "output.txt")
         output = [x for x in output if x != 0]
-        output_list.append(output)
+        output_list.append(len(output))
 
     return torch.tensor(output_list)
 
@@ -83,21 +83,24 @@ def invariants_eval_n(X, n):
         x = X[i].flatten()
         output = compute_from_file(x, "output.txt")
         output = [x for x in output if x != 0]
-        m = len(output)
-        output_tensor[i, :m] = torch.tensor(output)
+        if len(output) >= n:
+            output_selected = random.sample(output, n)
+            output_tensor[i] = torch.tensor(output_selected)
+        else:
+            output_tensor[i, :len(output)] = torch.tensor(output)
 
     return output_tensor
 
 
 digits = load_digits()
 X = digits.images  # (1797, 8, 8)
-max_value = 9510
-invariants = invariants_eval_n(X, max_value)
-print(invariants.shape)
+#max_value = 9510
+#invariants = invariants_eval_n(X, max_value)
+#print(invariants.shape)
 #print(invariants[:10, :10])
 
 
-#invariants = invariants_eval_all(X)
+invariants = invariants_eval_n(X, 520)
 #print(invariants)
 #mean_value = torch.mean(invariants.float())
 #max_value = torch.max(invariants.float())
@@ -109,5 +112,5 @@ print(invariants.shape)
 #tensor(9507.)
 #tensor(487.)
 
-torch.save(invariants, "invariants.pt")
+torch.save(invariants, "invariants2.pt")
 
