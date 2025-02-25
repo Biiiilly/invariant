@@ -11,7 +11,7 @@ from layer import InvariantNet  # Replace with the path/name of your layer modul
 
 # Load data
 digits = load_digits()
-X = torch.load("invariants1.pt")  # Shape (1797, 9510)
+X = torch.load("invariants.pt")  # Shape (1797, 4751)
 y = digits.target                # Shape (1797,)
 
 # Train-test split

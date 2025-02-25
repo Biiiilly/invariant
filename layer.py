@@ -39,7 +39,7 @@ class TransformingLayer(nn.Module):
 
 class InvariantNet(nn.Module):
 
-    def __init__(self, n=5200):
+    def __init__(self, n=4751):
 
         super(InvariantNet, self).__init__()
 
