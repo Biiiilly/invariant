@@ -1,5 +1,6 @@
 import torch
 from sklearn.datasets import load_digits
+import torchvision.transforms as transforms
 
 
 def compute_from_combined_list(xs, combined_list):
@@ -35,11 +36,14 @@ def invariants_eval_combined_list(X, combined_list):
 digits = load_digits()
 X = digits.images  # (1797, 8, 8)
 
+X_rot90 = torch.rot90(torch.tensor(X), k=1, dims=(1, 2))
+
 combined_list = []
-with open("combined_list.txt", "r") as f:
+with open("stored_data/combined_list.txt", "r") as f:
    for line in f:
     combined_list.append(line.strip())
 
-invariants = invariants_eval_combined_list(X, combined_list)
+# invariants = invariants_eval_combined_list(X, combined_list)
+invariants = invariants_eval_combined_list(X_rot90, combined_list)
 
-torch.save(invariants, "invariants.pt")
+torch.save(invariants, "stored_data/invariants_rot90.pt")

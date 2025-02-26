@@ -3,25 +3,19 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
-import numpy as np
-import torch.optim as optim
-import matplotlib.pyplot as plt  # <-- Added for plotting
+import matplotlib.pyplot as plt
+from layer import InvariantNet
 
-from layer import InvariantNet  # Replace with the path/name of your layer module if needed
 
 # Load data
 digits = load_digits()
-X = torch.load("invariants.pt")  # Shape (1797, 4751)
-y = digits.target                # Shape (1797,)
+X = torch.load("stored_data/invariants.pt")
+y = digits.target                
 
 # Train-test split
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
-
-# Optional normalization (commented out for now)
-# X_train = (X_train - X_train.mean()) / X_train.std()
-# X_test  = (X_test  - X_train.mean()) / X_train.std()
 
 # Create datasets and loaders
 train_dataset = TensorDataset(X_train, torch.tensor(y_train, dtype=torch.long))
@@ -85,11 +79,9 @@ for epoch in range(epochs):
     print(f"Test Accuracy: {accuracy:.2f}%")
 
 # Save model
-torch.save(network.state_dict(), 'sklearn_digits.pth')
+torch.save(network.state_dict(), 'invariants.pth')
 
-# -------------------------------
-# PLOTTING TRAINING LOSS & ACCURACY
-# -------------------------------
+
 plt.figure(figsize=(12, 5))
 
 # Plot training loss
