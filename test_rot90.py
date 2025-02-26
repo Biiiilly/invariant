@@ -23,4 +23,4 @@ with torch.no_grad():
     total = y.size(0)
     correct = (predicted == y).sum().item()
     accuracy = correct / total * 100
-    print(f"Test Accuracy on entire dataset: {accuracy:.2f}%")
+    print(f"Test Accuracy on 90 Degree Rotated Dataset: {accuracy:.2f}%")
