@@ -9,7 +9,7 @@ from layer import InvariantNet
 
 # Load data
 digits = load_digits()
-X = torch.load("stored_data/invariants.pt")
+X = torch.load("stored_data/invariants_selected_100.pt")
 y = digits.target                
 
 # Train-test split

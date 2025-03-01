@@ -39,11 +39,11 @@ X = digits.images  # (1797, 8, 8)
 X_rot90 = torch.rot90(torch.tensor(X), k=1, dims=(1, 2))
 
 combined_list = []
-with open("stored_data/combined_list.txt", "r") as f:
+with open("stored_data/new_combined_list_100.txt", "r") as f:
    for line in f:
     combined_list.append(line.strip())
 
 # invariants = invariants_eval_combined_list(X, combined_list)
-invariants = invariants_eval_combined_list(X_rot90, combined_list)
+invariants = invariants_eval_combined_list(X, combined_list)
 
-torch.save(invariants, "stored_data/invariants_rot90.pt")
+torch.save(invariants, "stored_data/invariants_selected_100.pt")
