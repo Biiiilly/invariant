@@ -11,7 +11,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 invariant_model = InvariantNet().to(device)
 invariant_model = invariant_model.double()
-invariant_model.load_state_dict(torch.load('stored_data/invariants.pth', map_location=device))
+invariant_model.load_state_dict(torch.load('invariants.pth', map_location=device))
 invariant_model.eval()
 
 X = X.to(device)

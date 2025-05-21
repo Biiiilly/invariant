@@ -17,7 +17,7 @@ X_rotated = torch.stack([random_rotate(img.unsqueeze(0)).squeeze(0) for img in X
 X_rotated = X_rotated.to(torch.double)
 
 combined_list = []
-with open("stored_data/combined_list.txt", "r") as f:
+with open("stored_data/new_combined_list_100.txt", "r") as f:
    for line in f:
     combined_list.append(line.strip())
 
@@ -28,7 +28,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 invariant_model = InvariantNet().to(device)
 invariant_model = invariant_model.double()
-invariant_model.load_state_dict(torch.load('stored_data/invariants.pth', map_location=device))
+invariant_model.load_state_dict(torch.load('invariants.pth', map_location=device))
 invariant_model.eval()
 
 X = X.to(device)
