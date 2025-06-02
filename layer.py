@@ -4,16 +4,6 @@ import torch.nn.functional as F
 
 
 class InvariantNet(nn.Module):
-    """
-    Reduced-parameter network (~14K params) for input dimension n=100.
-    Architecture:
-      fc1: 100 -> 64
-      fc2: 64  -> 64
-      fc3: 64  -> 40
-      fc4: 40  -> 10   (output)
-      bn1, bn2, bn3 for the three hidden layers
-      dropout = 0.5
-    """
 
     def __init__(self, n=100):
         super(InvariantNet, self).__init__()

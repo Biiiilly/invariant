@@ -173,11 +173,12 @@ def generate_invariants(n):
 
     singular_commands = f"""
     LIB "finvar.lib";
-    ring F = 0, ({variables}), dp;
+    ring F=0,({variables}),dp;
     {R_singular}
     matrix REY,M=reynolds_molien(R);
-    matrix P=primary_char0(REY,M);
-    print(P);
+    poly p(1..2);
+    p(1..2)=partial_molien(M,5);
+    p(1);
     """
 
     print(singular_commands)

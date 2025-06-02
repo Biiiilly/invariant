@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
     new_list = proportional_random_sample(data, n)
 
-    out_file_path = "stored_data/new_combined_list_100.txt"
+    out_file_path = "trash/new_combined_list_100.txt"
     with open(out_file_path, 'w', encoding='utf-8') as f:
         for elem in new_list:
             f.write(str(elem) + "\n")
